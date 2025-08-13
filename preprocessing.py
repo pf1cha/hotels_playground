@@ -1,6 +1,8 @@
 import numpy as np
 import pandas as pd
 from sklearn.preprocessing import MinMaxScaler
+import seaborn as sns
+import matplotlib.pyplot as plt
 
 pd.set_option('display.max_columns', None)
 
@@ -14,6 +16,15 @@ def scaling_features(df):
     numerical_features = df.select_dtypes(include=['int64', 'float64']).columns
     df[numerical_features] = scaler.fit_transform(df[numerical_features])
     return df
+
+def correlation_heatmap(df):
+    numerics = df.select_dtypes(include=['int64', 'float64']).columns
+    new_df = df[numerics]
+    plt.figure(figsize=(20, 10))
+    correlation_matrix = new_df.corr()
+    sns.heatmap(correlation_matrix, annot=True, fmt=".2f", cmap='coolwarm', square=True)
+    plt.title('Correlation Heatmap')
+    plt.show()
 
 
 def cleaned_data(df):
