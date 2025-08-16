@@ -1,8 +1,7 @@
 import numpy as np
 import pandas as pd
 from sklearn.preprocessing import MinMaxScaler
-import seaborn as sns
-import matplotlib.pyplot as plt
+from sklearn.pipeline import Pipeline
 
 pd.set_option('display.max_columns', None)
 
@@ -17,14 +16,12 @@ def scaling_features(df):
     df[numerical_features] = scaler.fit_transform(df[numerical_features])
     return df
 
-def correlation_heatmap(df):
-    numerics = df.select_dtypes(include=['int64', 'float64']).columns
-    new_df = df[numerics]
-    plt.figure(figsize=(20, 10))
-    correlation_matrix = new_df.corr()
-    sns.heatmap(correlation_matrix, annot=True, fmt=".2f", cmap='coolwarm', square=True)
-    plt.title('Correlation Heatmap')
-    plt.show()
+
+def handling_categorical_features(df):
+    df_dummies = pd.get_dummies(df, columns=['meal', 'distribution_channel',
+                                             'customer_type', 'hotel', 'deposit_type'], drop_first=True)
+    df_dummies = scaling_features(df_dummies)
+    return df_dummies
 
 
 def cleaned_data(df):
@@ -50,10 +47,7 @@ def cleaned_data(df):
     df['stays_in_nights'] = df['stays_in_weekend_nights'] + df['stays_in_week_nights']
     df.drop(['stays_in_weekend_nights', 'stays_in_week_nights'], axis=1, inplace=True)
     df['children'] = df['children'].astype(int)
-    df_dummies = pd.get_dummies(df, columns=['meal', 'distribution_channel',
-                                             'customer_type', 'hotel', 'deposit_type'], drop_first=True)
-    df_dummies = scaling_features(df_dummies)
-    return df_dummies
+    return df
 
 
 def split_data_into_features_and_target(df):

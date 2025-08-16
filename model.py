@@ -1,13 +1,52 @@
 from sklearn.model_selection import train_test_split
-from preprocessing import cleaned_data, split_data_into_features_and_target, correlation_heatmap
 from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+from sklearn.cluster import KMeans
+from sklearn.metrics import classification_report, confusion_matrix, precision_recall_fscore_support
+from sklearn.model_selection import GridSearchCV
+from sklearn.svm import SVC
+
+from preprocessing import *
 
 
-def train_model(df):
-    correlation_heatmap(df)
-    updated_hotels = cleaned_data(df)
-    X_hotels, y_hotels = split_data_into_features_and_target(updated_hotels)
+def svm_model(df):
+    X_hotels, y_hotels = split_data_into_features_and_target(df)
+    X_train, X_test, y_train, y_test = train_test_split(X_hotels, y_hotels,
+                                                        test_size=0.15,
+                                                        random_state=239,
+                                                        shuffle=True,
+                                                        stratify=y_hotels)
+    svm = SVC(kernel='linear', random_state=239)
+    svm.fit(X_train, y_train)
+    y_pred = svm.predict(X_test)
+    return precision_recall_fscore_support(y_test, y_pred, average='weighted'), confusion_matrix(y_test, y_pred)
+
+
+
+def grid_search(df, model, param_grid):
+    param_grid = {
+        'C': [1, 2, 5, 10, 20],
+        'solver': ['lbfgs', 'liblinear'],
+        'max_iter': [500, 1000, 1500]
+    }
+
+    grid = GridSearchCV(LogisticRegression(),
+                        param_grid=param_grid,
+                        n_jobs=-1,
+                        cv=5,
+                        scoring='accuracy')
+    X_hotels, y_hotels = split_data_into_features_and_target(df)
+    X_train, X_test, y_train, y_test = train_test_split(X_hotels, y_hotels,
+                                                        test_size=0.15,
+                                                        random_state=239,
+                                                        shuffle=True,
+                                                        stratify=y_hotels)
+    grid.fit(X_train, y_train)
+    print(f"Best parameters: {grid.best_params_}")
+    print(f"Best score: {grid.best_score_}")
+
+
+def logistic_model_training(df):
+    X_hotels, y_hotels = split_data_into_features_and_target(df)
     X_train, X_test, y_train, y_test = train_test_split(X_hotels, y_hotels,
                                                         test_size=0.15,
                                                         random_state=239,
@@ -16,6 +55,4 @@ def train_model(df):
     logistic = LogisticRegression(solver='lbfgs', max_iter=1000)
     logistic.fit(X_train, y_train)
     y_pred = logistic.predict(X_test)
-    print("Accuracy:", accuracy_score(y_test, y_pred))
-    print("Confusion Matrix:\n", confusion_matrix(y_test, y_pred))
-    print("Classification Report:\n", classification_report(y_test, y_pred))
+    return precision_recall_fscore_support(y_test, y_pred, average='weighted'), confusion_matrix(y_test, y_pred)
