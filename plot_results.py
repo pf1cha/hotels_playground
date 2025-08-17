@@ -20,3 +20,12 @@ def correlation_heatmap(df):
     sns.heatmap(correlation_matrix, annot=True, fmt=".2f", cmap='coolwarm', square=True)
     plt.title('Correlation Heatmap')
     plt.show()
+
+
+def plot_feature_importance(feature_importance_df):
+    plt.figure(figsize=(12, 8))
+    sns.barplot(x='Importance', y='Feature', data=feature_importance_df)
+    plt.title('Feature Importance')
+    plt.xlabel('Importance')
+    plt.ylabel('Feature')
+    plt.show()
