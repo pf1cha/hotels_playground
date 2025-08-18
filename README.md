@@ -9,6 +9,8 @@ Then I encoded the remaining categorical features using one-hot encoding.
 (one-hot encoding from _pd.get_dummies_ function).
 
 
+
+
 The result of the feature importance method is as follows:
 
 
@@ -18,7 +20,7 @@ To find the best model for hotels task,
 
 | Model               | Accuracy | Precision | Recall | F1 Score |
 |---------------------|----------|-----------|--------|----------|
-| Logistic Regression | -        | -         | -      | -        |
+| Logistic Regression | -        | 0.793     | 0.764  | 0.738    |
 | Random Forest       | -        | -         | -      | -        |
 | Naive Bayes         | -        | -         | -      | -        |
 | SVM                 | -        | -         | -      | -        |

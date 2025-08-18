@@ -2,14 +2,14 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 
-def plot_confusion_matrix(confusion_matrix, labels):
+def plot_confusion_matrix(confusion_matrix, labels, name='confusion_matrix.png'):
     plt.figure(figsize=(10, 7))
     sns.heatmap(confusion_matrix, annot=True, fmt='d', cmap='Blues',
                 xticklabels=labels, yticklabels=labels, linewidths=.5)
     plt.title('Confusion Matrix')
     plt.xlabel('Predicted')
     plt.ylabel('Actual')
-    plt.show()
+    plt.savefig(f'figures/{name}')
 
 
 def correlation_heatmap(df):
@@ -23,7 +23,7 @@ def correlation_heatmap(df):
 
 
 def plot_feature_importance(feature_importance_df):
-    plt.figure(figsize=(12, 8))
+    plt.figure(figsize=(20, 10))
     sns.barplot(x='Importance', y='Feature', data=feature_importance_df)
     plt.title('Feature Importance')
     plt.xlabel('Importance')
