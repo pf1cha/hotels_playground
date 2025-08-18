@@ -16,11 +16,20 @@ The result of the feature importance method is as follows:
 
 # Comparing Models
 
-To find the best model for hotels task, 
+To find the best model for hotels task, I trained four different models: 
+- Logistic Regression 
+- Random Forest
+- Naive Bayes
+- SVM
 
-| Model               | Accuracy | Precision | Recall | F1 Score |
-|---------------------|----------|-----------|--------|----------|
-| Logistic Regression | -        | 0.793     | 0.764  | 0.738    |
-| Random Forest       | -        | -         | -      | -        |
-| Naive Bayes         | -        | -         | -      | -        |
-| SVM                 | -        | -         | -      | -        |
+Results of the models are shown in the table below.
+
+| Model               | Precision | Recall | F1 Score |
+|---------------------|-----------|--------|----------|
+| Logistic Regression | 0.793     | 0.764  | 0.738    |
+| Random Forest       | -         | -      | -        |
+| Naive Bayes         | -         | -      | -        |
+| SVM                 | -         | -      | -        |
+
+For this task the 'accuracy method here' is more important than others because 
+a missed cancellation (false positive) is more costly than a wrong cancellation (false negative).
