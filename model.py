@@ -22,9 +22,7 @@ def feature_importance(df):
     feature_names = X_hotels.columns
     feature_importance_df = pd.DataFrame({'Feature': feature_names, 'Importance': importances})
     feature_importance_df.sort_values(by='Importance', ascending=False, inplace=True)
-    y_pred = rf.predict(X_test)
-    return feature_importance_df, precision_recall_fscore_support(y_test, y_pred, average='weighted'), confusion_matrix(
-        y_test, y_pred)
+    return feature_importance_df
 
 
 def svm_model(df):
