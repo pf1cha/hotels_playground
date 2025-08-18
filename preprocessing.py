@@ -63,9 +63,10 @@ def split_data_into_features_and_target(df):
     y = df['is_canceled']
     return X, y
 
+
 def basic_cleaning(df):
     # TODO replace inplace=True with df = df.dropna() to avoid modifying the original dataframe
-    df.drop(columns=['agent', 'company'], axis=1, inplace=True) # Due to high number of null values
+    df.drop(columns=['agent', 'company'], axis=1, inplace=True)  # Due to high number of null values
     df['country'].fillna(df['country'].mode()[0], inplace=True)  # Fill nulls with mode
     df[['meal', 'distribution_channel']] = df[['meal',
                                                'distribution_channel']].replace('Undefined', np.nan)
