@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 
-def plot_confusion_matrix(confusion_matrix, labels, name='confusion_matrix.png'):
+def plot_confusion_matrix(confusion_matrix, labels, name=None):
     plt.figure(figsize=(10, 7))
     sns.heatmap(confusion_matrix, annot=True, fmt='d', cmap='Blues',
                 xticklabels=labels, yticklabels=labels, linewidths=.5)
