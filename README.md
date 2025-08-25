@@ -35,3 +35,18 @@ Results of the models on testing data are shown in the table below.
 
 For this task the 'accuracy method here' is more important than others because 
 a missed cancellation (false positive) is more costly than a wrong cancellation (false negative).
+
+Below you can find confusion matrices for all models which we trained in this project.
+
+The confusion matrix for Random Forest with 100 estimators.
+![](figures/random_forest_cm.png)
+
+The confusion matrix for Logistic Regression with those parameters: 
+`solver='liblinear', max_iter=500, penalty='l1', random_state=239, C=20`
+![](figures/logistic_model_cm.png)
+
+The confusion matrix for Support Vector Machine with parameters: 
+`(kernel='rbf', random_state=239, C=10, gamma='scale')`
+![](figures/svm_model_cm.png)
+
+# Overall
