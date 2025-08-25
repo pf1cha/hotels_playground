@@ -12,6 +12,8 @@ Then I encoded the remaining categorical features using one-hot encoding.
 
 
 The result of the feature importance method is as follows:
+![importance](figures/feature_importance.png)
+After that we can use the most important features for our model. 
 
 
 # Comparing Models
@@ -22,14 +24,14 @@ To find the best model for hotels task, I trained four different models:
 - Naive Bayes
 - SVM
 
-Results of the models are shown in the table below.
+Results of the models on testing data are shown in the table below.
 
 | Model               | Precision | Recall | F1 Score |
 |---------------------|-----------|--------|----------|
 | Logistic Regression | 0.793     | 0.764  | 0.738    |
-| Random Forest       | -         | -      | -        |
+| Random Forest       | 0.861     | 0.862  | 0.860    |
 | Naive Bayes         | -         | -      | -        |
-| SVM                 | -         | -      | -        |
+| SVM                 | 0.741     | 0.744  | 0.733    |
 
 For this task the 'accuracy method here' is more important than others because 
 a missed cancellation (false positive) is more costly than a wrong cancellation (false negative).
