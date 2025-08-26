@@ -1,6 +1,10 @@
 # Information about dataset
 A dataset was taken from [Kaggle](https://www.kaggle.com/datasets/mojtaba142/hotel-booking?resource=download).
 
+# Goal of the project
+The goal of this project is to predict whether a hotel booking will be 
+canceled or not based on various features provided in booking dataset.
+
 # Preprocessing data
 For preprocessing the data, I used the feature importance method to select the most relevant features for the model.
 At the begging, I encoded categorical features using categorical encoding and got rid of the irrelevant features 
@@ -48,5 +52,8 @@ The confusion matrix for Logistic Regression with those parameters:
 The confusion matrix for Support Vector Machine with parameters: 
 `(kernel='rbf', random_state=239, C=10, gamma='scale')`
 ![](figures/svm_model_cm.png)
+
+Due to the laptop specifications, I was not able to tune hyperparameters of models, but I've written a function 
+which allows to tune hyperparameters using GridSearchCV and can be used in this project.
 
 # Overall
